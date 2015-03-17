@@ -65,6 +65,9 @@ class lampAPI(Resource):
                 if request.args['mode'][0] == "rainbow":
                     MODE = 2
                     return "<html>Rainbow</html>"
+                if request.args['mode'][0] == "weather":
+                    MODE = 3
+                    return "<html>Current Weather is:</html>"
 
 
 
@@ -115,3 +118,6 @@ while True:
         sleep(5)
     if MODE == 2:
         rainbow()
+    if MODE == 3:
+        rainbow()
+
