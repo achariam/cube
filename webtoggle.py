@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from twisted.web.server import Site       #import twisted stuff
 from twisted.web.resource import Resource
 from twisted.internet import reactor
@@ -19,7 +21,7 @@ api_key = DarkSkyAPIKey
 lat = 40.73444444444444
 lng = -74.17444444444445 #Newark, NJ
 
-#forecast = forecastio.load_forecast(api_key, lat, lng)
+forecast = forecastio.load_forecast(api_key, lat, lng)
 
 num = 30;
 led = LEDStrip(num)
@@ -91,28 +93,20 @@ class lampAPI(Resource):
 
 def weatherNow():
     while 1:
+
+
         global globaltemp
-        globaltemp = random.randint(1, 100)
+        forecastNow = forecast.currently()
+        globaltemp = forecastNow.temperature
         print globaltemp
-        sleep(5)
+        print forecastNow.summary
+        sleep(180) #Check every 3 minutes
 
 
 
 def pulse(temp):
-        print temp
 
-        if temp > 50:
-            step = 0.01
-            level = 0.01
-            dir = step
-            while level >= 0.0:
-                led.fill(Color(0, 0, 255, level))
-                led.update()
-                if(level >= 0.99):
-                   dir = -step
-                level += dir
-
-        if temp < 50:
+        if temp <= 30:
             step = 0.01
             level = 0.01
             dir = step
@@ -121,10 +115,92 @@ def pulse(temp):
                 led.update()
                 if(level >= 0.99):
                    dir = -step
-                level += dir
-        #forecastNow = forecast.currently()
-          #  print forecastNow.summary
-          #  print forecastNow.temperature
+                level += dir    #30 degrees and under = white
+
+        elif temp <= 40:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(130, 200, 255, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #31-40 degrees = light blue
+
+
+        elif temp <= 50:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(0, 0, 255, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #41-50 degrees = blue
+
+
+        elif temp <= 60:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(0, 255, 125, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #51-60 degrees = blueish green
+
+
+        elif temp <= 70:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(0, 255, 0, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #61-70 degrees = green
+
+
+        elif temp <= 80:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(200, 255, 50, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #71-80 degrees = yellowish green
+
+
+        elif temp <= 90:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(255, 255, 0, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #81-90 degrees = yellow
+
+
+        else:
+            step = 0.01
+            level = 0.01
+            dir = step
+            while level >= 0.0:
+                led.fill(Color(255, 0, 0, level))
+                led.update()
+                if(level >= 0.99):
+                   dir = -step
+                level += dir    #90+ degrees = red
+
+
 
 
 

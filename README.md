@@ -2,6 +2,8 @@
 
 A set of scripts and simple code for a basic glowing RGB led cube. 
 
+Warning: Really rough around the edges.
+
 # Abstract
 
 An LED wifi enabled cube that displays ambient information, such as weather, through glowing colors. It will be controlled by both a web and mobile app.
