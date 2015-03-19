@@ -21,8 +21,6 @@ api_key = DarkSkyAPIKey
 lat = 40.73444444444444
 lng = -74.17444444444445 #Newark, NJ
 
-forecast = forecastio.load_forecast(api_key, lat, lng)
-
 num = 30;
 led = LEDStrip(num)
 white = Color(255, 255, 255)
@@ -96,6 +94,7 @@ def weatherNow():
 
 
         global globaltemp
+        forecast = forecastio.load_forecast(api_key, lat, lng)
         forecastNow = forecast.currently()
         globaltemp = forecastNow.temperature
         print globaltemp
