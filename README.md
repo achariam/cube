@@ -1,5 +1,7 @@
 # RGB LED Cube prototype
 
+[**Full Project Overview**](www.achariam.com/prototyping)
+
 A set of scripts and simple code for a basic glowing RGB led cube. 
 
 Warning: Really rough around the edges.
